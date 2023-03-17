@@ -1,0 +1,83 @@
+import UIKit
+
+func isLeapYear(year: Int) -> Bool {
+    guard year >= 1582 else {
+        return false
+        
+    }
+    return (year % 4 == 0 && !(year % 100 == 0))  || (year % 400 == 0)
+    
+}
+
+func daysInMonth(year: Int,month: Int) -> Int  {
+    guard (1...12).contains(month) else {
+        print("Month must be  1...12!")
+        return 0
+    }
+    
+    var result = 0
+    
+    switch month  {
+    case 1, 3, 5, 7, 8, 10, 12:
+        result = 31
+    case 4, 6, 9, 11:
+        result = 28
+        if isLeapYear(year: year) {
+            result += 1
+        }
+    default:
+        break
+    }
+    
+    return result
+}
+ 
+
+let todayYear = 2023
+let todayMonth = 3
+let todayDay = 17
+
+//mybirthday
+let birthYear = 2003
+let birthMonth = 3
+let birthDay = 22
+
+var totalDays = 0
+
+
+//find out how many days there are left in the month of birth
+var daysToAdd = daysInMonth(year: birthYear, month: birthMonth) - birthDay
+print("\(birthYear)-\(birthMonth) = +\(daysToAdd)")
+totalDays += daysToAdd
+
+var year =  birthYear
+var month = birthMonth + 1
+
+while month <= 12 {
+    daysToAdd = daysInMonth(year: year, month:month)
+    print("\(year)-\(month) = +\(daysToAdd)")
+    totalDays += daysToAdd
+    month += 1
+}
+
+year +=  1
+while year < todayYear {
+    daysToAdd = 365
+    if isLeapYear(year: year) {
+        daysToAdd += 1
+    }
+    print("\(year) = +\(daysToAdd)")
+    totalDays += daysToAdd
+    year  += 1
+}
+
+month = 1
+while month < todayMonth  {
+    daysToAdd = daysInMonth(year: year, month: month)
+    print("\(year)-\(month) = +\(daysToAdd)")
+    totalDays += daysToAdd
+    
+    print ("You are \(totalDays) days old")
+    month += 1
+    
+}
