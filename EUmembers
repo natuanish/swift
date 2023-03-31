@@ -1,0 +1,43 @@
+//
+//  ContentView.swift
+//  EUMembers
+//
+//  Created by Anish Natu on 31.3.2023.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    let finland = Country(code: "FI", name: "Finland",
+          area: 338_435, population: 5_555_300)
+    
+    let france = Country(code: "FR", name: "France",
+                         area: 632_833, population: 67_897_000)
+    
+    var body: some View {
+        VStack {
+            
+            Text("\(france.name)")
+            
+            Image(france.code.lowercased())
+                //.resizable()
+                .scaledToFit()
+                .border(Color.black, width: 1)
+            
+                
+            VStack {
+                Text("Population: \(france.population)")
+                Text("Area: \(france.area)")
+                
+            }
+            .padding()
+        }
+    }
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
